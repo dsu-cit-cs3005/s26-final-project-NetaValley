@@ -1,0 +1,9 @@
+name: Calling CS 3005 Grader
+on:
+  push:
+  pull_request:
+
+jobs:
+  call-central-grader:
+    uses: dsu-cit-cs3005/jeffs-centralized-grader-for-cs3005/.github/workflows/ut-cs-3005-functionality-check.yml@main
+    secrets: inherit
