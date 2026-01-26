@@ -1,7 +1,7 @@
 #include "image_menu.h"
 #include <iostream>
 
-void drawAsciiImage( std::istream& is, std::ostream& os, const Image& image )
+void drawAsciiImage( std::istream&, std::ostream& os, const Image& image )
 {
     for (int row = 0; row < image.getHeight(); row++)
     {
