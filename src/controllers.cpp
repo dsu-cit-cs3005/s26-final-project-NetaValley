@@ -84,7 +84,7 @@ void configureMenu(MenuData& menu_data) {
         "Set a channel value in input image 1.");
 
     menu_data.addAction("pixel", setPixel,
-        "Set a pixel’s 3 values in input image 1.");
+        "Set a pixel's 3 values in input image 1.");
 
     menu_data.addAction("clear", clearAll,
         "Set all pixels to 0,0,0 in input image 1.");
