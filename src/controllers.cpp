@@ -12,8 +12,9 @@ int assignment1(std::istream& is, std::ostream& os) {
 int assignment2( std::istream& is, std::ostream& os ) {
     ActionData action_data(is, os);
     diagonalQuadPattern(action_data);
-    drawAsciiImage(action_data);
     copyImage(action_data);
+    drawAsciiImage(action_data);
+
     return 0;
 
 }
@@ -23,8 +24,8 @@ int assignment3(std::istream& is, std::ostream& os)
     ActionData action_data(is, os);
 
     stripedDiagonalPattern(action_data);
-    writeUserImage(action_data);
     copyImage(action_data);
+    writeUserImage(action_data);
 
     return 0;
 }
