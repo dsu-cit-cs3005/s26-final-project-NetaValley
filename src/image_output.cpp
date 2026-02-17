@@ -6,17 +6,21 @@
 
 void drawAsciiImage(ActionData& action_data)
 {
-    for (int row = 0; row < action_data.getOutputImage().getHeight(); row++)
-    {
-        for (int column = 0; column < action_data.getOutputImage().getWidth(); column++)
-        {
-            int red   = action_data.getOutputImage().getChannel(row, column, 0);
-            int green = action_data.getOutputImage().getChannel(row, column, 1);
-            int blue  = action_data.getOutputImage().getChannel(row, column, 2);
+    const int height = action_data.getOutputImage().getHeight();
+    const int width  = action_data.getOutputImage().getWidth();
 
+    for (int row = 0; row < height; ++row)
+    {
+        for (int col = 0; col < width; ++col)
+        {
+            int red   = action_data.getOutputImage().getChannel(row, col, 0);
+            int green = action_data.getOutputImage().getChannel(row, col, 1);
+            int blue  = action_data.getOutputImage().getChannel(row, col, 2);
+
+ 
             double strength = (red + green + blue) / 765.0;
 
-            char outputChar = ' ';
+            char outputChar;
 
             if      (strength >= 1.0) outputChar = '@';
             else if (strength >= 0.9) outputChar = '#';
@@ -28,6 +32,7 @@ void drawAsciiImage(ActionData& action_data)
             else if (strength >= 0.3) outputChar = '~';
             else if (strength >= 0.2) outputChar = '-';
             else if (strength >= 0.1) outputChar = '.';
+            else outputChar = ' ';  
 
             action_data.getOS() << outputChar;
         }
@@ -53,7 +58,7 @@ void copyImage(ActionData& action_data){
 }
 
 void readUserImage1( ActionData& action_data ) {
-    std::string filename = getString(action_data, "Input filename?");
+    std::string filename = getString(action_data, "Input filename? ");
     std::ifstream fin(filename);
 
     if (!fin.is_open()) {
