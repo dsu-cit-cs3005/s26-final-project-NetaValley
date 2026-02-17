@@ -2,35 +2,61 @@
 #include <string>
 #include "image_menu.h"
 
-std::string getString( std::istream& is, std::ostream& os, const std::string& prompt ) {
-    os << prompt;
-    std::string input;
-    is >> input;
-    return input;
+std::string getString( ActionData& action_data, const std::string& prompt ) {
+    std::string value;
+    action_data.getOS() << prompt;
+    action_data.getIS() >> value;
+    return value;
 }
 
-int getInteger(std::istream& is, std::ostream& os, const std::string& prompt) {
-    os << prompt;
+int getInteger(ActionData& action_data, const std::string& prompt) {
     int value;
-    is >> value;
+    action_data.getOS() << prompt;
+    action_data.getIS() >> value;
     return value;
 }
 
-double getDouble(std::istream& is, std::ostream& os, const std::string& prompt) {
-    os << prompt;
+double getDouble(ActionData& action_data, const std::string& prompt) {
     double value;
-    is >> value;
+    action_data.getOS() << prompt;
+    action_data.getIS() >> value;
     return value;
 }
 
-int askQuestions3(std::istream& is, std::ostream& os) {
-    std::string color = getString(is, os, "What is your favorite color? ");
-    int numLines = getInteger(is, os, "What is your favorite integer? ");
-    double favNumber = getDouble(is, os, "What is your favorite number? ");
+int askQuestions3(ActionData& action_data) {
+    std::string color = getString(action_data, "What is your favorite color? ");
+    int numLines = getInteger(action_data, "What is your favorite integer? ");
+    double favNumber = getDouble(action_data, "What is your favorite number? ");
 
     for (int i = 1; i <= numLines; ++i) {
-        os << i << " " << color << " " << favNumber << "\n";
+        action_data.getOS() << i << " " << color << " " << favNumber << "\n";
     }
 
     return numLines;
+}
+
+std::string getChoice( ActionData& action_data ) {
+    std::string value = getString(action_data, "Choice? ");
+    return value;
+}
+
+
+void commentLine(ActionData& action_data) {
+    char c;
+
+    while (true) {
+        action_data.getIS().read(&c, 1);
+
+        if (!action_data.getIS().good()) {
+            return;
+        }
+
+        if (c == '\n') {
+            return;
+        }
+    }
+}
+
+void quit(ActionData& action_data) {
+    action_data.setDone();
 }

@@ -1,17 +1,18 @@
+#include "ActionData.h"
 #include "image_menu.h"
 #include <iostream>
 #include <fstream>
 #include <string>
 
-void drawAsciiImage( std::istream&, std::ostream& os, const Image& image )
+void drawAsciiImage(ActionData& action_data)
 {
-    for (int row = 0; row < image.getHeight(); row++)
+    for (int row = 0; row < action_data.getOutputImage().getHeight(); row++)
     {
-        for (int column = 0; column < image.getWidth(); column++)
+        for (int column = 0; column < action_data.getOutputImage().getWidth(); column++)
         {
-            int red   = image.getChannel(row, column, 0);
-            int green = image.getChannel(row, column, 1);
-            int blue  = image.getChannel(row, column, 2);
+            int red   = action_data.getOutputImage().getChannel(row, column, 0);
+            int green = action_data.getOutputImage().getChannel(row, column, 1);
+            int blue  = action_data.getOutputImage().getChannel(row, column, 2);
 
             double strength = (red + green + blue) / 765.0;
 
@@ -28,28 +29,37 @@ void drawAsciiImage( std::istream&, std::ostream& os, const Image& image )
             else if (strength >= 0.2) outputChar = '-';
             else if (strength >= 0.1) outputChar = '.';
 
-            os << outputChar;
+            action_data.getOS() << outputChar;
         }
-        os << '\n';
+        action_data.getOS() << '\n';
     }
 }
 
 
-void writeUserImage( std::istream& is, std::ostream& os, const PPM& p ) {
-        // Ask user for filename
-    std::string filename = getString(is, os, "Output filename? ");
-
-    // Open file in binary mode
+void writeUserImage(ActionData& action_data) {
+    std::string filename = getString(action_data, "Output filename? ");
     std::ofstream outFile(filename, std::ios::binary);
     if (!outFile)
     {
-        os << "Error: could not open output file.\n";
+        action_data.getOS() << "Error: could not open output file.\n";
+        return;
+    }
+    action_data.getOutputImage().writeStream(outFile);
+    outFile.close();
+}
+
+void copyImage(ActionData& action_data){
+    action_data.getOutputImage() = action_data.getInputImage1();
+}
+
+void readUserImage1( ActionData& action_data ) {
+    std::string filename = getString(action_data, "Input filename?");
+    std::ifstream fin(filename);
+
+    if (!fin.is_open()) {
+        action_data.getOS() << "'" << filename << "' could not be opened.\n";
         return;
     }
 
-    // Write PPM data to file
-    p.writeStream(outFile);
-
-    // Close the file
-    outFile.close();
+    action_data.getInputImage1().readStream(fin);
 }

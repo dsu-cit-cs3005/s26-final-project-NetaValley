@@ -1,17 +1,16 @@
 #include "image_menu.h"
 #include "PPM.h"
 #include <iostream>
+#include <string>
 
-void diagonalQuadPattern(std::istream& is, std::ostream& os, Image& image) {
-    // Declare height and width
-    int h = getInteger(is, os, "Image height? ");
-    int w = getInteger(is, os, "Image width? ");
+void diagonalQuadPattern( ActionData& action_data ) {
+    int h = getInteger(action_data, "Image height? ");
+    int w = getInteger(action_data, "Image width? ");
+    action_data.getInputImage1().setMaxColorValue(255);
 
-    // Set the image size
-    image.setHeight(h);
-    image.setWidth(w);
+    action_data.getInputImage1().setHeight(h);
+    action_data.getInputImage1().setWidth(w);
 
-    // Loop through every pixel
     for (int row = 0; row < h; ++row) {
         for (int column = 0; column < w; ++column) {
 
@@ -19,41 +18,38 @@ void diagonalQuadPattern(std::istream& is, std::ostream& os, Image& image) {
             int green;
             int blue;
 
-            // Red channel: top half vs bottom half
             if (row < h / 2) {
                 red = 0;
             } else {
                 red = 255;
             }
 
-            // Blue channel: left half vs right half
             if (column < w / 2) {
                 blue = 0;
             } else {
                 blue = 255;
             }
 
-            // Green channel: formula
             green = (2 * row + 2 * column) % 256;
 
-            // Set the channels in the Image object
-            image.setChannel(row, column, 0, red);    // Red
-            image.setChannel(row, column, 1, green);  // Green
-            image.setChannel(row, column, 2, blue);   // Blue
+            action_data.getInputImage1().setChannel(row, column, 0, red);    
+            action_data.getInputImage1().setChannel(row, column, 1, green);  
+            action_data.getInputImage1().setChannel(row, column, 2, blue);  
         }
     }
 }
 
 
-void stripedDiagonalPattern(std::istream& is, std::ostream& os, PPM& p) {
-    int height = getInteger(is, os, "Image height? ");
-    int width  = getInteger(is, os, "Image width? ");
+void stripedDiagonalPattern( ActionData& action_data ) {
+    int height = getInteger(action_data, "Image height? ");
+    int width  = getInteger(action_data, "Image width? ");
 
-    p = PPM(height, width);
+    action_data.getInputImage1().setHeight(height);
+    action_data.getInputImage1().setWidth(width);
 
     int max_color = (height + width) / 3;
     if (max_color > 255) max_color = 255;
-    p.setMaxColorValue(max_color);
+    action_data.getInputImage1().setMaxColorValue(max_color);
 
     for (int r = 0; r < height; r++) {
         for (int c = 0; c < width; c++) {
@@ -71,7 +67,46 @@ void stripedDiagonalPattern(std::istream& is, std::ostream& os, PPM& p) {
 
             int blue = (c < r) ? 0 : max_color;
 
-            p.setPixel(r, c, red, green, blue);
+            action_data.getInputImage1().setPixel(r, c, red, green, blue);
+        }
+    }
+}
+
+
+void setSize( ActionData& action_data ) {
+    int height = getInteger(action_data, "Height?");
+    int width = getInteger(action_data, "Width?");
+    action_data.getInputImage1().setHeight(height);
+    action_data.getInputImage1().setWidth(width);
+}
+
+void setMaxColorValue( ActionData& action_data ) {
+    int max_color = getInteger(action_data, "Max color value?");
+    action_data.getInputImage1().setMaxColorValue(max_color);
+}
+
+void setChannel( ActionData& action_data ) {
+    int row = getInteger(action_data, "Row?");
+    int column = getInteger(action_data, "Column?");
+    int channel = getInteger(action_data, "Channel?");
+    int value = getInteger(action_data, "Value?");
+    action_data.getInputImage1().setChannel(row,column,channel,value);
+}
+
+void setPixel( ActionData& action_data ) {
+    int row = getInteger(action_data, "Row?");
+    int column = getInteger(action_data, "Column?");
+    int red = getInteger(action_data, "Red?");
+    int green = getInteger(action_data, "Green?");
+    int blue = getInteger(action_data, "Blue?");
+    action_data.getInputImage1().setPixel(row, column, red, green, blue);
+}
+
+void clearAll(ActionData& action_data) {
+
+    for (int row = 0; row < action_data.getInputImage1().getHeight(); ++row) {
+        for (int col = 0; col < action_data.getInputImage1().getWidth(); ++col) {
+            action_data.getInputImage1().setPixel(row, col, 0, 0,0); 
         }
     }
 }

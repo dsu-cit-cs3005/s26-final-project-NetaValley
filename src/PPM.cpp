@@ -9,17 +9,6 @@ PPM::PPM(const int& height, const int& width)
     setHeight(height);
 }
 
-// PPM::PPM() 
-// : max_color_value(1) { //member initiazer list
-//     image Image;
-// }
-
-
-
-// PPM::PPM( const int& height, const int& width )
-// : max_color_value(1) {
-//     Image image(height, width);
-// }
 
 int PPM::getMaxColorValue() const {
     return max_color_value;
@@ -74,6 +63,48 @@ void PPM::writeStream(std::ostream& os) const {
 
             unsigned char blueChar = static_cast<unsigned char> (blue);
             os.write(reinterpret_cast<char*>(&blueChar),1);            
+        }
+    }
+}
+
+void PPM::readStream(std::istream& is) {
+
+    std::string magic;
+    int width;
+    int height;
+    int max_color_value;
+
+    // Read header
+    is >> magic;
+    is >> width >> height;
+    is >> max_color_value;
+
+    // Verify P6
+    if (magic != "P6") {
+        return; // or handle error
+    }
+
+    // Set image properties
+    setWidth(width);
+    setHeight(height);
+    setMaxColorValue(max_color_value);
+
+    // Consume the single whitespace after max color value
+    is.get();
+
+    // Read pixel data
+    for (int row = 0; row < height; row++) {
+        for (int column = 0; column < width; column++) {
+
+            unsigned char r;
+            unsigned char g;
+            unsigned char b;
+
+            is.read(reinterpret_cast<char*>(&r), 1);
+            is.read(reinterpret_cast<char*>(&g), 1);
+            is.read(reinterpret_cast<char*>(&b), 1);
+
+            setPixel(row, column, r, g, b);
         }
     }
 }
