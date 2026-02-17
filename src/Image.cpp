@@ -48,14 +48,22 @@ int Image::getChannel( const int& row, const int& column, const int& channel ) c
 void Image::setHeight( const int& h ) {
     if (h >= 0) {
         height = h;
-        data.resize(width * height * 3);
+        if (width > 0 && height > 0) {
+            data.resize(width * height * 3);
+        } else {
+            data.clear();
+        }
     }
 }
 
 void Image::setWidth( const int& w ) {
     if (w >= 0) {
         width = w;
-        data.resize(width * height * 3);
+        if (width > 0 && height > 0) {
+            data.resize(width * height * 3);
+        } else {
+            data.clear();  
+        }
     }
 }
 
