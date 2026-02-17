@@ -44,28 +44,25 @@ int Image::getChannel( const int& row, const int& column, const int& channel ) c
         return data[index(row,column,channel)];
     }
 }
-
-void Image::setHeight( const int& h ) {
+void Image::setHeight(const int& h) {
     if (h >= 0) {
         height = h;
         if (width > 0 && height > 0) {
             data.resize(width * height * 3);
-        } else {
-            data.clear();
         }
     }
 }
 
-void Image::setWidth( const int& w ) {
+void Image::setWidth(const int& w) {
     if (w >= 0) {
         width = w;
         if (width > 0 && height > 0) {
             data.resize(width * height * 3);
-        } else {
-            data.clear();  
         }
     }
 }
+
+
 
 void Image::setChannel( const int& row, const int& column, const int& channel, const int& value ) {
     if (indexValid(row,column,channel)) {
