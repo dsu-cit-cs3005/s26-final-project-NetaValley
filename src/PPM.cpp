@@ -74,25 +74,20 @@ void PPM::readStream(std::istream& is) {
     int height;
     int max_color_value;
 
-    // Read header
     is >> magic;
     is >> width >> height;
     is >> max_color_value;
 
-    // Verify P6
     if (magic != "P6") {
-        return; // or handle error
+        return; 
     }
 
-    // Set image properties
     setWidth(width);
     setHeight(height);
     setMaxColorValue(max_color_value);
 
-    // Consume the single whitespace after max color value
     is.get();
 
-    // Read pixel data
     for (int row = 0; row < height; row++) {
         for (int column = 0; column < width; column++) {
 
@@ -107,4 +102,145 @@ void PPM::readStream(std::istream& is) {
             setPixel(row, column, r, g, b);
         }
     }
+}
+
+int PPM::getPixel() const {
+    int pixels =  getHeight() * getWidth();
+    return pixels;
+}
+
+bool PPM::operator==( const PPM& rhs ) const {
+    int pixels = getPixel();
+    int pixelsrhs = rhs.getPixel();
+    return pixels == pixelsrhs;
+}
+
+bool PPM::operator!=( const PPM& rhs ) const{
+    int pixels = getPixel();
+    int pixelsrhs = rhs.getPixel();
+    return pixels != pixelsrhs;
+}
+
+bool PPM::operator<( const PPM& rhs ) const{
+    int pixels = getPixel();
+    int pixelsrhs = rhs.getPixel();
+    return pixels < pixelsrhs;
+}
+
+bool PPM::operator<=( const PPM& rhs ) const{
+    int pixels = getPixel();
+    int pixelsrhs = rhs.getPixel();
+    return pixels <= pixelsrhs;
+}
+
+bool PPM::operator>( const PPM& rhs ) const{
+    int pixels = getPixel();
+    int pixelsrhs = rhs.getPixel();
+    return pixels > pixelsrhs;
+}
+
+bool PPM::operator>=( const PPM& rhs ) const{
+    int pixels = getPixel();
+    int pixelsrhs = rhs.getPixel();
+    return pixels >= pixelsrhs;
+}
+
+PPM& PPM::operator+=( const PPM& rhs ){
+    for (int row = 0; row < getHeight(); ++row){
+        for (int column = 0; column < getWidth(); ++column){
+            for (int channel = 0; channel < 3; ++channel){
+
+            int sum = getChannel(row,column,channel) + rhs.getChannel(row,column,channel);
+
+            if (sum > getMaxColorValue()) {
+                sum = getMaxColorValue();
+            }
+            setChannel(row,column,channel,sum);
+        }
+    }
+}
+    return *this;
+}
+
+PPM& PPM::operator-=( const PPM& rhs ){
+    for (int row = 0; row < getHeight(); ++row){
+        for (int column = 0; column < getWidth(); ++column){
+            for (int channel = 0; channel < 3; ++channel){
+
+            int sum = getChannel(row,column,channel) - rhs.getChannel(row,column,channel);
+
+            if (sum < 0) {
+                sum = 0;
+            }
+            setChannel(row,column,channel,sum);
+        }
+    }
+}
+    return *this;
+}
+
+PPM& PPM::operator*=( const double& rhs ){
+    for (int row = 0; row < getHeight(); ++row){
+        for (int column = 0; column < getWidth(); ++column){
+            for (int channel = 0; channel < 3; ++channel){
+
+            int sum = getChannel(row,column,channel) * rhs;
+
+            if (sum > getMaxColorValue()) {
+                sum = getMaxColorValue();
+            }
+            if (sum < 0) {
+                sum = 0;
+            }
+
+            setChannel(row,column,channel,sum);
+        }
+    }
+}
+    return *this;
+}
+
+PPM& PPM::operator/=( const double& rhs ){
+    for (int row = 0; row < getHeight(); ++row){
+        for (int column = 0; column < getWidth(); ++column){
+            for (int channel = 0; channel < 3; ++channel){
+
+            int sum = getChannel(row,column,channel) / rhs;
+
+            if (sum > getMaxColorValue()) {
+                sum = getMaxColorValue();
+            }
+            if (sum < 0) {
+                sum = 0;
+            }
+
+            setChannel(row,column,channel,sum);
+        }
+    }
+}
+    return *this;
+}
+
+PPM PPM::operator+( const PPM& rhs ) const{
+    PPM object(*this);
+    object += rhs;
+    return object;
+}
+
+PPM PPM::operator-( const PPM& rhs ) const{
+    PPM object(*this);
+    object -= rhs;
+    return object;
+}
+
+PPM PPM::operator*( const double& rhs ) const{
+    PPM object(*this);
+    object *= rhs;
+    return object;
+}
+
+PPM PPM::operator/( const double& rhs ) const{
+    PPM object(*this);
+    object /= rhs;
+    return object;
 }

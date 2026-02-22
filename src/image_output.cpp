@@ -68,3 +68,16 @@ void readUserImage1( ActionData& action_data ) {
 
     action_data.getInputImage1().readStream(fin);
 }
+
+
+void readUserImage2( ActionData& action_data ){
+    std::string filename = getString(action_data, "Input filename? ");
+    std::ifstream fin(filename);
+
+    if (!fin.is_open()) {
+        action_data.getOS() << "'" << filename << "' could not be opened.\n";
+        return;
+    }
+
+    action_data.getInputImage2().readStream(fin);    
+}
