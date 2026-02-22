@@ -3,7 +3,7 @@ CXXFLAGS = -Wall -std=c++17
 
 PROGRAMS = hello questions_3 ascii_image image_file ppm_menu
 
-COMMON_OBJS = user_io.o controllers.o Image.o image_drawing.o image_output.o PPM.o ActionData.o MenuData.o image_filter.o
+COMMON_OBJS = user_io.o controllers.o Image.o image_drawing.o image_output.o PPM.o ActionData.o MenuData.o image_filters.o
 
 HELLO_OBJS = hello.o
 QUESTIONS_OBJS = questions_3.o $(COMMON_OBJS)
