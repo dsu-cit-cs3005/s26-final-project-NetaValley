@@ -114,6 +114,9 @@ void configureMenu(MenuData& menu_data) {
 
     menu_data.addAction("/=", divideEquals,
         "Set input image 1 by dividing by a number.");
+
+    menu_data.addAction("read2", readUserImage2,
+        "Read file into input image 2.");
 }
 
 int imageMenu(std::istream& is, std::ostream& os) {
