@@ -61,7 +61,7 @@ ActionData.o: ActionData.cpp ActionData.h
 MenuData.o: MenuData.cpp MenuData.h
 	$(CXX) $(CXXFLAGS) -c $<
 
-image_filters.o: image_filters.cpp image_menu.h 
+image_filters.o: image_filters.cpp image_menu.h ActionData.h MenuData.h PPM.h Image.h
 	$(CXX) $(CXXFLAGS) -c $<
 
 clean:
