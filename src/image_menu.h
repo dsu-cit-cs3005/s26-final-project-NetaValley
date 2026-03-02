@@ -51,3 +51,13 @@ void times( ActionData& action_data );
 void divide( ActionData& action_data );
 
 void readUserImage2( ActionData& action_data );
+
+
+void grayFromRed(ActionData& action_data); 
+void grayFromGreen(ActionData& action_data);
+void grayFromBlue(ActionData& action_data); 
+void grayFromLinearColorimetric(ActionData& action_data); 
+
+
+void drawCircle(ActionData& action_data);
+void drawBox(ActionData& action_data);

@@ -2,6 +2,7 @@
 #include "PPM.h"
 #include <iostream>
 #include <string>
+#include <cmath>
 
 void diagonalQuadPattern(ActionData& action_data) {
     int h = getInteger(action_data, "Image height? ");
@@ -83,6 +84,41 @@ void clearAll(ActionData& action_data) {
     for (int r = 0; r < h; ++r) {
         for (int c = 0; c < w; ++c) {
             action_data.getInputImage1().setPixel(r, c, 0, 0, 0);
+        }
+    }
+}
+
+
+void drawCircle(ActionData& action_data){
+    int centerrow = getInteger(action_data, "Center Row? ");
+    int centercol = getInteger(action_data, "Center Column? ");
+    int radius = getInteger(action_data, "Radius? ");
+    int red = getInteger(action_data, "Red? ");
+    int green = getInteger(action_data, "Green? ");
+    int blue = getInteger(action_data, "Blue? ");
+    for (int row = (centerrow-radius); row > (centerrow +radius); row++){
+        for (int col = (centercol-radius); col > (centercol+radius); col++){
+            int distance = std::sqrt((col-centercol)*(col-centercol) + (row-centerrow)*(row-centerrow));
+            if (distance <= radius){
+                action_data.getInputImage1().setPixel(row,col,red,green,blue);
+            }
+        }
+
+    }
+
+}
+
+void drawBox(ActionData& action_data){
+    int tRow = getInteger(action_data, "Top Row? ");
+    int lCol = getInteger(action_data, "Left Column? ");
+    int bRow = getInteger(action_data, "Bottom Row? ");
+    int rCol = getInteger(action_data, "Rigth Column? ");
+    int red = getInteger(action_data, "Red? ");
+    int green = getInteger(action_data, "Green? ");
+    int blue = getInteger(action_data, "Blue? ");  
+    for (int row = tRow; row > bRow; row ++) {
+        for (int col = lCol; col > rCol; col++){
+            action_data.getInputImage1().setPixel(row,col,red,green,blue);
         }
     }
 }
