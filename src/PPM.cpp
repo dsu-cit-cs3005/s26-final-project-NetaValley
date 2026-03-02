@@ -246,7 +246,7 @@ PPM PPM::operator/( const double& rhs ) const{
 }
 
 
-void PPM::grayFromChannel( PPM& dst, int src_channel ) const{
+void PPM::grayFromChannel( PPM& dst, const int& src_channel ) const{
     dst.setWidth(getWidth());
     dst.setHeight(getHeight());
     dst.setMaxColorValue(getMaxColorValue());
