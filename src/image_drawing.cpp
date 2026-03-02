@@ -96,8 +96,8 @@ void drawCircle(ActionData& action_data){
     int red = getInteger(action_data, "Red? ");
     int green = getInteger(action_data, "Green? ");
     int blue = getInteger(action_data, "Blue? ");
-    for (int row = (centerrow-radius); row > (centerrow +radius); row++){
-        for (int col = (centercol-radius); col > (centercol+radius); col++){
+    for (int row = (centerrow-radius); row < (centerrow +radius); row++){
+        for (int col = (centercol-radius); col < (centercol+radius); col++){
             int distance = std::sqrt((col-centercol)*(col-centercol) + (row-centerrow)*(row-centerrow));
             if (distance <= radius){
                 action_data.getInputImage1().setPixel(row,col,red,green,blue);
@@ -112,12 +112,12 @@ void drawBox(ActionData& action_data){
     int tRow = getInteger(action_data, "Top Row? ");
     int lCol = getInteger(action_data, "Left Column? ");
     int bRow = getInteger(action_data, "Bottom Row? ");
-    int rCol = getInteger(action_data, "Rigth Column? ");
+    int rCol = getInteger(action_data, "Right Column? ");
     int red = getInteger(action_data, "Red? ");
     int green = getInteger(action_data, "Green? ");
     int blue = getInteger(action_data, "Blue? ");  
-    for (int row = tRow; row > bRow; row ++) {
-        for (int col = lCol; col > rCol; col++){
+    for (int row = tRow; row <= bRow; row ++) {
+        for (int col = lCol; col <= rCol; col++){
             action_data.getInputImage1().setPixel(row,col,red,green,blue);
         }
     }
