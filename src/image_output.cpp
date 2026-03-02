@@ -70,7 +70,7 @@ void readUserImage1( ActionData& action_data ) {
 }
 
 
-void readUserImage2( ActionData& action_data ){
+void readUserImage2( ActionData& action_data ) {
     std::string filename = getString(action_data, "Input filename? ");
     std::ifstream fin(filename);
 
@@ -79,5 +79,9 @@ void readUserImage2( ActionData& action_data ){
         return;
     }
 
-    action_data.getInputImage2().readStream(fin);    
+    action_data.getInputImage2().setHeight(0);
+     action_data.getInputImage2().setWidth(0);
+    action_data.getInputImage2().setMaxColorValue(255);
+
+    action_data.getInputImage2().readStream(fin);
 }
