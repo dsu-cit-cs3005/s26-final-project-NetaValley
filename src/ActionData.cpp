@@ -1,7 +1,8 @@
 #include "ActionData.h"
+#include "NumberGrid.h"
 
 ActionData::ActionData(std::istream& is, std::ostream& os)
-: input(is), output(os), Done(false) {}
+: input(is), output(os), Done(false), NumberGrid(0) {}
 
 std::istream& ActionData::getIS(){
     return input;
@@ -29,4 +30,19 @@ bool ActionData::getDone() const{
 
 void ActionData::setDone() {
     Done=true;
+}
+
+~ActionData(){
+
+}
+
+NumberGrid& getGrid(){
+    return *NumberGrid;
+}
+
+void setGrid(NumberGrid *grid){
+    if (NumberGrid != 0){
+        delete NumberGrid;
+    }
+    NumberGrid = grid;
 }

@@ -134,6 +134,11 @@ void configureMenu(MenuData& menu_data) {
 
     menu_data.addAction("box", drawBox, "Draw a box shape in input image 1.");
 
+    menu_data.addAction("grid", configureGrid, "Configure the grid.");
+
+    menu_data.addAction("grid-set", setGrid, "Set a single value in the grid.");
+
+    menu_data.addAction("grid-apply", applyGrid, "Use the grid values to set colors in the output image.");
 
 
 }
@@ -141,6 +146,7 @@ void configureMenu(MenuData& menu_data) {
 int imageMenu(std::istream& is, std::ostream& os) {
 
     ActionData action_data(is, os);
+    action_data.setGrid(new)
     MenuData menu_data;
 
     configureMenu(menu_data);

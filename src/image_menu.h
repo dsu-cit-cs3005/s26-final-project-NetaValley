@@ -61,3 +61,7 @@ void grayFromLinearColorimetric(ActionData& action_data);
 
 void drawCircle(ActionData& action_data);
 void drawBox(ActionData& action_data);
+
+void configureGrid(ActionData& action_data);
+void setGrid(ActionData& action_data);
+void applyGrid(ActionData& action_data);

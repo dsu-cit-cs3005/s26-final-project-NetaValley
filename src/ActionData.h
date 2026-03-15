@@ -2,7 +2,7 @@
 #include <iostream>
 #include "PPM.h"
 #include "Image.h"
-
+#include "NumberGrid.h"
 
 
 
@@ -16,6 +16,9 @@ public:
     PPM& getOutputImage();
     bool getDone() const;
     void setDone();
+    ~ActionData();
+    NumberGrid& getGrid();
+    void setGrid(NumberGrid *grid);
 private:
     std::istream& input;
     std::ostream& output;
@@ -23,6 +26,7 @@ private:
     PPM inputimage2;
     PPM outputimage;
     bool Done;
+    NumberGrid* NumberGrid
 
 
 
