@@ -77,6 +77,10 @@
                 if (getNumber(row,col) == 0 || (getNumber(row,col) % 8) == 4){
                     ppm.setPixel(row,col,0,0,0);
                 }
+
+                else if (getNumber(row,col) == this->max_value) {
+                    ppm.setPixel(row,col,63,31,31);
+                }
                 else if ((getNumber(row,col)%8) == 0){
                     ppm.setPixel(row,col,63,63,63);
                 }
