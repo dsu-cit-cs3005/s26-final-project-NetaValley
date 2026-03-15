@@ -1,11 +1,11 @@
 #include "NumberGrid.h"
 
     NumberGrid::NumberGrid()
-    : max_value(255), height(300), width(400),  data(0) {}
+    : max_value(255), height(300), width(400),  data(width * height, 0) {}
 
     NumberGrid::NumberGrid( const int& h, const int& w )
     : max_value(255), height(h), width(w) {
-        data.resize(width * height);
+        data.resize(width * height, 0);
     }
 
     NumberGrid::~NumberGrid() {}
@@ -43,11 +43,11 @@
     }
 
     int NumberGrid::index( const int& row, const int& column ) const{
-        return (row*width*column);
+        return (row*width+column);
     }
 
     bool NumberGrid::indexValid( const int& row, const int& column ) const{
-        return (row <= height && width <= column);
+        return (row >= 0 && row < height && column >= 0 && column < width);
 
     }
     bool NumberGrid::numberValid( const int& number ) const{
