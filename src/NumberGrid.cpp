@@ -22,7 +22,7 @@
     int NumberGrid::getMaxNumber( ) const {
         return max_value;
     }
-
+//hello
     void NumberGrid::setGridSize( const int& height, const int& width ){
         if (height >= 2 && width >= 2) {
             this->height = height;
