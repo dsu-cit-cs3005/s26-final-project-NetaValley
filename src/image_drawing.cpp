@@ -129,7 +129,7 @@ void configureGrid(ActionData& action_data){
     int width = getInteger(action_data,"Grid Width? ");
     int max = getInteger(action_data,"Grid Max Value? ");
     action_data.getGrid().setGridSize(height, width);
-    action_data.getGrid().setMaxValue(max);
+    action_data.getGrid().setMaxNumber(max);
 }
 
 void setGrid(ActionData& action_data){
@@ -140,5 +140,5 @@ void setGrid(ActionData& action_data){
 }
 
 void applyGrid(ActionData& action_data){
-    action_data.getGrid().setPPM(action_data.getOutputImage);
+    action_data.getGrid().setPPM(action_data.getOutputImage());
 }

@@ -26,7 +26,7 @@ private:
     PPM inputimage2;
     PPM outputimage;
     bool Done;
-    NumberGrid* NumberGrid
+    NumberGrid* numberGrid=0;
 
 
 

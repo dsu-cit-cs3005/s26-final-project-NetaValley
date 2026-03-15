@@ -146,7 +146,7 @@ void configureMenu(MenuData& menu_data) {
 int imageMenu(std::istream& is, std::ostream& os) {
 
     ActionData action_data(is, os);
-    action_data.setGrid(new)
+    action_data.setGrid(new NumberGrid());
     MenuData menu_data;
 
     configureMenu(menu_data);

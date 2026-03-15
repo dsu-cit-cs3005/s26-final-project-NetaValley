@@ -1,12 +1,15 @@
+#pragma once
 #include <iostream>
+#include <vector>
+#include "PPM.h"
 
 
 class NumberGrid {
 private:
+    int max_value;
     int height;
     int width;
-    int max_value;
-    std:vector<int> data;
+    std::vector<int> data;
 
 public:
     NumberGrid( );

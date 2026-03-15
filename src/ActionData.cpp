@@ -2,7 +2,7 @@
 #include "NumberGrid.h"
 
 ActionData::ActionData(std::istream& is, std::ostream& os)
-: input(is), output(os), Done(false), NumberGrid(0) {}
+: input(is), output(os), Done(false), numberGrid(0) {}
 
 std::istream& ActionData::getIS(){
     return input;
@@ -32,17 +32,18 @@ void ActionData::setDone() {
     Done=true;
 }
 
-~ActionData(){
+ActionData::~ActionData(){
+    delete numberGrid;
 
 }
 
-NumberGrid& getGrid(){
-    return *NumberGrid;
+NumberGrid& ActionData::getGrid(){
+    return *numberGrid;
 }
 
-void setGrid(NumberGrid *grid){
-    if (NumberGrid != 0){
-        delete NumberGrid;
+void ActionData::setGrid(NumberGrid *grid){
+    if (grid != 0){
+        delete numberGrid;
     }
-    NumberGrid = grid;
+    *numberGrid = *grid;
 }
