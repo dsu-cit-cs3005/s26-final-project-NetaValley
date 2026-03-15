@@ -1,7 +1,7 @@
 #include "NumberGrid.h"
 
     NumberGrid::NumberGrid()
-    : max_value(255), height(300), width(400),  data(width * height, 0) {}
+    : max_value(255), height(300), width(400),  data(300 * 400, 0) {}
 
     NumberGrid::NumberGrid( const int& h, const int& w )
     : max_value(255), height(h), width(w) {

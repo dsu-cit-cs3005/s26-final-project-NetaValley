@@ -68,38 +68,30 @@ void PPM::writeStream(std::ostream& os) const {
 }
 
 void PPM::readStream(std::istream& is) {
-
     std::string magic;
-    int width;
-    int height;
-    int max_color_value;
+    int w, h, max_val;
 
     is >> magic;
-    is >> width >> height;
-    is >> max_color_value;
+    if (!is || magic != "P6") return;
 
-    if (magic != "P6") {
-        return; 
-    }
+    is >> w >> h >> max_val;
+    if (!is || w <= 0 || h <= 0 || max_val <= 0 || max_val > 255) return;
 
-    setWidth(width);
-    setHeight(height);
-    setMaxColorValue(max_color_value);
-
+    // consume single whitespace/newline
     is.get();
 
-    for (int row = 0; row < height; row++) {
-        for (int column = 0; column < width; column++) {
+    setWidth(w);
+    setHeight(h);
+    setMaxColorValue(max_val);
 
-            unsigned char r;
-            unsigned char g;
-            unsigned char b;
+    for (int row = 0; row < h; ++row) {
+        for (int col = 0; col < w; ++col) {
+            unsigned char r, g, b;
+            if (!is.read(reinterpret_cast<char*>(&r), 1)) return;
+            if (!is.read(reinterpret_cast<char*>(&g), 1)) return;
+            if (!is.read(reinterpret_cast<char*>(&b), 1)) return;
 
-            is.read(reinterpret_cast<char*>(&r), 1);
-            is.read(reinterpret_cast<char*>(&g), 1);
-            is.read(reinterpret_cast<char*>(&b), 1);
-
-            setPixel(row, column, r, g, b);
+            setPixel(row, col, r, g, b);
         }
     }
 }
