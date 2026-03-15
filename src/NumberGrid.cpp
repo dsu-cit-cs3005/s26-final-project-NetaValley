@@ -51,7 +51,7 @@
 
     }
     bool NumberGrid::numberValid( const int& number ) const{
-        return (number >= 0 && number < max_value);
+        return (number >= 0 && number <= max_value);
 
     }
     int NumberGrid::getNumber( const int& row, const int& column ) const{
@@ -69,8 +69,7 @@
         }
     }
     void NumberGrid::setPPM( PPM& ppm ) const{
-        ppm.setHeight(this->height);
-        ppm.setWidth(this->width);
+        ppm.heightwidth(this->height, this->width);
         ppm.setMaxColorValue(63);
         for (int row=0;row < ppm.getHeight(); row++){
             for (int col=0;col < ppm.getWidth(); col++){

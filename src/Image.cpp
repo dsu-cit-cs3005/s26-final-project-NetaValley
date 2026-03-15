@@ -62,7 +62,13 @@ void Image::setWidth(const int& w) {
     }
 }
 
-
+void Image::heightwidth(const int& h, const int& w) {
+    if (h >= 0 && w >= 0) {
+        height = h;
+        width = w;
+        data.resize(width * height * 3, 0); // initialize all pixels to 0
+    }
+}
 
 void Image::setChannel( const int& row, const int& column, const int& channel, const int& value ) {
     if (indexValid(row,column,channel)) {

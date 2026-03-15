@@ -25,6 +25,7 @@ public:
     
     void setHeight(const int& height);
     void setWidth(const int& width);
+    void heightwidth(const int& h, const int& w);
 
 };
 
