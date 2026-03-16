@@ -154,6 +154,7 @@ int imageMenu(std::istream& is, std::ostream& os) {
     while (!action_data.getDone() && action_data.getIS().good()) {
 
         std::string choice = getChoice(action_data);
+        if (choice.empty()) break;
         takeAction(choice, menu_data, action_data);
     }
 
