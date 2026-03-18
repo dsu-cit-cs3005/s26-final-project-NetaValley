@@ -42,8 +42,8 @@ NumberGrid& ActionData::getGrid(){
 }
 
 void ActionData::setGrid(NumberGrid *grid){
-    if (grid != 0){
+    if (numberGrid != nullptr){
         delete numberGrid;
     }
-    *numberGrid = *grid;
+    numberGrid = grid;
 }
