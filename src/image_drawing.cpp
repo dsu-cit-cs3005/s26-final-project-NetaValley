@@ -49,8 +49,7 @@ void setSize(ActionData& action_data) {
     int h = getInteger(action_data, "Height? ");
     int w = getInteger(action_data, "Width? ");
 
-    action_data.getInputImage1().setWidth(w);   
-    action_data.getInputImage1().setHeight(h);
+    action_data.getInputImage1().heightwidth(h, w);
 }
 
 void setMaxColorValue(ActionData& action_data) {
