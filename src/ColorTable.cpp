@@ -147,17 +147,12 @@ double ColorTable::gradientValue(const double y1, const double x1, const double 
     return y1 + slope * (x - x1);
 } //Calculate the y-value along the gradient from point (x1,y1) to the point at position x.
 
-void ColorTable::insertGradient(const Color& color1, const Color& color2, const int& position1, const int& position2) {
-    if (position1 < 0 || position2 < 0) {
-        return;
-    }
-    if (static_cast<size_t>(position1) >= Colors.size() ||
-        static_cast<size_t>(position2) >= Colors.size()) {
-        return;
-    }
-    if (position1 >= position2) {
-        return;
-    }
+void ColorTable::insertGradient(const Color& color1, const Color& color2,
+                                const int& position1, const int& position2) {
+    if (position1 < 0 || position2 < 0) return;
+    if (static_cast<size_t>(position1) >= Colors.size()) return;
+    if (static_cast<size_t>(position2) >= Colors.size()) return;
+    if (position1 >= position2) return;
 
     double redSlope = gradientSlope(color1.getChannel(0), color2.getChannel(0),
                                     position1, position2);
@@ -167,16 +162,16 @@ void ColorTable::insertGradient(const Color& color1, const Color& color2, const 
                                      position1, position2);
 
     for (int i = position1; i <= position2; i++) {
-        int red = gradientValue(color1.getChannel(0), redSlope, i, position1);
-        int green = gradientValue(color1.getChannel(1), greenSlope, i, position1);
-        int blue = gradientValue(color1.getChannel(2), blueSlope, i, position1);
+        int red = gradientValue(color1.getChannel(0), position1, redSlope, i);
+        int green = gradientValue(color1.getChannel(1), position1, greenSlope, i);
+        int blue = gradientValue(color1.getChannel(2), position1, blueSlope, i);
 
         Colors[i].setChannel(0, red);
         Colors[i].setChannel(1, green);
         Colors[i].setChannel(2, blue);
     }
 }
- //Change the colors from position1 to position2, inclusive, to be gradients from color1 to color2. If position1 is not less than position2, no change is made. If either position is out of range, no change is made. Should use the gradientSlope() and gradientValue() methods.
+
 int ColorTable::getMaxChannelValue() const {
     int maxVal = 0;
 
