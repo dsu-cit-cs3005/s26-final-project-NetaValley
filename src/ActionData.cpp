@@ -2,7 +2,7 @@
 #include "NumberGrid.h"
 
 ActionData::ActionData(std::istream& is, std::ostream& os)
-: input(is), output(os), Done(false),colorTable(16), numberGrid(0)
+: colorTable(16),input(is), output(os), Done(false), numberGrid(0)
 {
     Color start(0, 255, 0);
     Color end(255, 0, 255);

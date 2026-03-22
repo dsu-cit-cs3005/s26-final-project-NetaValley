@@ -104,7 +104,7 @@ void ColorTable::setNumberOfColors( const int& num_color ){
 const Color& ColorTable::operator[](const int& i) const {
     static Color error_color(-1, -1, -1);
 
-    if (i < 0 || i >= Colors.size()) {
+    if (i < 0 || static_cast<size_t>(i) >= Colors.size()) {
         return error_color;
     }
 
@@ -125,7 +125,7 @@ void ColorTable::setRandomColor( const int& max_color_value, const int& position
     if (max_color_value < 0){
         return;
     }
-    if (position < 0 || position >= Colors.size()){
+    if (position < 0 || static_cast<size_t>(position) >= Colors.size()){
         return;
     }
 
@@ -151,7 +151,8 @@ void ColorTable::insertGradient(const Color& color1, const Color& color2, const 
     if (position1 < 0 || position2 < 0) {
         return;
     }
-    if (position1 >= Colors.size() || position2 >= Colors.size()) {
+    if (static_cast<size_t>(position1) >= Colors.size() ||
+        static_cast<size_t>(position2) >= Colors.size()) {
         return;
     }
     if (position1 >= position2) {
@@ -179,7 +180,7 @@ void ColorTable::insertGradient(const Color& color1, const Color& color2, const 
 int ColorTable::getMaxChannelValue() const {
     int maxVal = 0;
 
-    for (int i = 0; i < Colors.size(); i++) {
+    for (size_t i = 0; i < Colors.size(); i++) {
         if (Colors[i].getChannel(0) > maxVal)
             maxVal = Colors[i].getChannel(0);
 
