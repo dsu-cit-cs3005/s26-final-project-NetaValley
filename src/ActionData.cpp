@@ -2,7 +2,13 @@
 #include "NumberGrid.h"
 
 ActionData::ActionData(std::istream& is, std::ostream& os)
-: input(is), output(os), Done(false), numberGrid(0) {}
+: input(is), output(os), Done(false),colorTable(16), numberGrid(0)
+{
+    Color start(0, 255, 0);
+    Color end(255, 0, 255);
+
+    colorTable.insertGradient(start, end, 0, 15);
+}
 
 std::istream& ActionData::getIS(){
     return input;
@@ -46,4 +52,7 @@ void ActionData::setGrid(NumberGrid *grid){
         delete numberGrid;
     }
     numberGrid = grid;
+}
+ColorTable& ActionData::getTable(){
+    return colorTable;
 }

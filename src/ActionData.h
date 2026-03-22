@@ -3,6 +3,8 @@
 #include "PPM.h"
 #include "Image.h"
 #include "NumberGrid.h"
+#include "ColorTable.h"
+
 
 
 
@@ -19,6 +21,8 @@ public:
     ~ActionData();
     NumberGrid& getGrid();
     void setGrid(NumberGrid *grid);
+    ColorTable& getTable();
+    ColorTable colorTable;
 private:
     std::istream& input;
     std::ostream& output;
@@ -27,6 +31,7 @@ private:
     PPM outputimage;
     bool Done;
     NumberGrid* numberGrid=0;
+
 
 
 

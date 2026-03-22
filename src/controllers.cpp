@@ -2,6 +2,7 @@
 #include "MenuData.h"
 #include "image_menu.h"
 #include "PPM.h"
+#include "ColorTable.h"
 #include <iostream>
 
 int assignment1(std::istream& is, std::ostream& os) {
@@ -140,7 +141,11 @@ void configureMenu(MenuData& menu_data) {
 
     menu_data.addAction("grid-apply", applyGrid, "Use the grid values to set colors in the output image.");
 
-
+    menu_data.addAction( "set-color-table-size", setColorTableSize, "Change the number of slots in the color table.");
+    menu_data.addAction( "set-color", setColor, "Set the RGB values for one slot in the color table.");
+    menu_data.addAction( "set-random-color", setRandomColor,"Randomly set the RGB values for one slot in the color table.");
+    menu_data.addAction( "set-color-gradient", setColorGradient,"Smoothly set the RGB values for a range of slots in the color table.");
+    menu_data.addAction( "grid-apply-color-table", applyGridColorTable, "Use the grid values to set colors in the output image using the color table.");
 }
 
 int imageMenu(std::istream& is, std::ostream& os) {

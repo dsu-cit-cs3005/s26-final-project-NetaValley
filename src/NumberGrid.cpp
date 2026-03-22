@@ -105,3 +105,31 @@
         }
 
     }
+
+void NumberGrid::setPPM( PPM& ppm, const ColorTable& colors ) const{
+    if (colors.getNumberOfColors() < 2){
+        return;
+    }
+    ppm.heightwidth(this->height, this->width);
+    ppm.setMaxColorValue(colors.getMaxChannelValue());
+    int color_count = colors.getNumberOfColors();
+
+    for (int row=0;row < ppm.getHeight(); row++){
+        for (int col=0;col < ppm.getWidth(); col++){
+            int gridnum = getNumber(row,col);
+            int index;
+
+            if (gridnum == getMaxNumber()){
+                index = color_count - 1;
+            }
+            else {
+                index = gridnum % color_count;
+            }
+
+            ppm.setPixel(row, col,
+                         colors[index].getChannel(0),
+                         colors[index].getChannel(1),
+                         colors[index].getChannel(2));
+        }
+    }
+}
