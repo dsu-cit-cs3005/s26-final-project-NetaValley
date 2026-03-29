@@ -3,7 +3,7 @@
 
 
 ComplexFractal::ComplexFractal()
-: NumberGrid(301,201), min_x(-1.5), max_x(1.5), min_y(-1), max_y(1), delta_x(0.01), delta_y(0.01)
+: NumberGrid(201,301), min_x(-1.5), max_x(1.5), min_y(-1), max_y(1), delta_x(0.01), delta_y(0.01)
 {}
 
 ComplexFractal::ComplexFractal( const int& height, const int& width, const double& min_x, const double& max_x, const double& min_y, const double& max_y )
