@@ -1,5 +1,6 @@
 #include "image_menu.h"
 #include "PPM.h"
+#include "ComplexFractal.h"
 #include <iostream>
 #include <string>
 #include <cmath>
@@ -182,3 +183,24 @@ void applyGridColorTable(ActionData& action_data) {
         action_data.colorTable
     );
 }
+
+
+void setFractalPlaneSize(ActionData& action_data){
+    NumberGrid& grid = action_data.getGrid();
+    ComplexFractal* fractal = dynamic_cast<ComplexFractal*>(&grid);
+    if (fractal != nullptr){
+    double min_x = getDouble(action_data, "Min X? ");
+    double max_x = getDouble(action_data, "Max X? ");
+    double min_y = getDouble(action_data, "Min Y? ");
+    double max_y = getDouble(action_data, "Max Y? ");
+
+    fractal->setPlaneSize(min_x, max_x, min_y, max_y);
+    }
+    else{
+        action_data.getOS() << "Not a ComplexFractal object. Can't set plane size." << std::endl;
+    }
+}
+void calculateFractal(ActionData& action_data){
+    action_data.getGrid().calculateAllNumbers();
+}
+
