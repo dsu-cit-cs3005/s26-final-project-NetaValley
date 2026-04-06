@@ -5,11 +5,11 @@
 #include "MenuData.h"
 #include "ColorTable.h"
 #include "ComplexFractal.h"
+#include "JuliaSet.h"
 #include <iostream>
 #include <string>
 
 
-// Function declarations
 
 std::string getString( ActionData& action_data, const std::string& prompt );
 int getInteger( ActionData& action_data, const std::string& prompt );
@@ -77,3 +77,10 @@ void applyGridColorTable(ActionData& action_data);
 
 void setFractalPlaneSize(ActionData& action_data);
 void calculateFractal(ActionData& action_data);
+
+
+void setJuliaParameters(ActionData& action_data);
+
+
+void setComplexFractal( ActionData& action_data ); 
+void setJuliaFractal( ActionData& action_data );

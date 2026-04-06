@@ -1,6 +1,7 @@
 #include "image_menu.h"
 #include "PPM.h"
 #include "ComplexFractal.h"
+#include "JuliaSet.h"
 #include <iostream>
 #include <string>
 #include <cmath>
@@ -200,7 +201,21 @@ void setFractalPlaneSize(ActionData& action_data){
         action_data.getOS() << "Not a ComplexFractal object. Can't set plane size." << std::endl;
     }
 }
+
 void calculateFractal(ActionData& action_data){
     action_data.getGrid().calculateAllNumbers();
 }
 
+
+void setJuliaParameters(ActionData& action_data){
+    NumberGrid& grid = action_data.getGrid();
+    JuliaSet* Julia = dynamic_cast<JuliaSet*>(&grid);
+    if (Julia != nullptr){
+        double a = getDouble(action_data, "Parameter a? ");
+        double b = getDouble(action_data, "Parameter b? ");
+        Julia->setParameters(a,b);
+    }
+    else{
+        action_data.getOS() << "Not a JuliaSet object. Can't set parameters." << std::endl;
+    }
+}
