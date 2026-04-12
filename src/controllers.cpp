@@ -5,6 +5,7 @@
 #include "ColorTable.h"
 #include "ComplexFractal.h"
 #include "JuliaSet.h"
+#include "MandelbrotSet.h"
 #include <iostream>
 
 int assignment1(std::istream& is, std::ostream& os) {
@@ -152,6 +153,8 @@ void configureMenu(MenuData& menu_data) {
     menu_data.addAction("complex-fractal", setComplexFractal, "Choose to make a complex plane.");
     menu_data.addAction("julia", setJuliaFractal, "Choose to make a Julia set.");
 
+    menu_data.addAction("mandelbrot", setMandelbrotFractal, "Choose to make a Mandelbrot set.");
+
 }
 
 int imageMenu(std::istream& is, std::ostream& os) {
@@ -179,4 +182,8 @@ void setComplexFractal( ActionData& action_data ){
 
 void setJuliaFractal( ActionData& action_data ){
     action_data.setGrid(new JuliaSet());
+}
+
+void setMandelbrotFractal( ActionData& action_data ){
+    action_data.setGrid(new MandelbrotSet());
 }

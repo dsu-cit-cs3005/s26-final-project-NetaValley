@@ -6,6 +6,7 @@
 #include "ColorTable.h"
 #include "ComplexFractal.h"
 #include "JuliaSet.h"
+#include "MandelbrotSet.h"
 #include <iostream>
 #include <string>
 
@@ -84,3 +85,5 @@ void setJuliaParameters(ActionData& action_data);
 
 void setComplexFractal( ActionData& action_data ); 
 void setJuliaFractal( ActionData& action_data );
+
+void setMandelbrotFractal( ActionData& action_data );

@@ -13,6 +13,7 @@ private:
     std::vector<int> data;
 
 public:
+
     NumberGrid( );
     NumberGrid( const int& height, const int& width ); 
     virtual ~NumberGrid(); 
